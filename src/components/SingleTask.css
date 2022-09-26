@@ -1,0 +1,31 @@
+.task__card {
+    display: flex;
+    width: 30%;
+    border-radius: .5rem;
+    padding: 2rem;
+    margin: 1rem .2rem;
+    background-image: url("https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg");
+}
+
+.task-text {
+    flex: 1;
+    padding: .5rem;
+    border: none;
+    font-size: 2rem;
+}
+
+.task-edit:focus {
+    outline: none;
+}
+
+.task-icon {
+    margin: 0 .5rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .task__card {
+        width: 90%;
+    }
+}

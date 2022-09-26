@@ -1,24 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useState } from "react";
+import InputField from './components/InputField';
+import TaskList from './components/TaskList';
+import { Task } from './interfaces/TaskInterface';
 import './App.css';
 
-function App() {
+
+const App: React.FC = () => {
+
+  // Usando TS para determinar el tipo de dato de un estado
+  const [ task, setTask ] = useState<string>("");
+
+  const [ allTask, setAllTask ] = useState<Task[]>([]);
+
+  const addTask = (event: React.FormEvent) => { //Type sacado de Stack Overflow para el event xD
+    event.preventDefault();
+
+    if (task) {
+      setAllTask([
+        ...allTask,
+        {
+          id: Date.now(), //para generar un id random
+          task,
+          completed: false
+        }
+      ]);
+
+      setTask("");
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1 className='header__title'>Planificador de Tareas</h1>
+
+      <InputField task={task}
+                  setTask={setTask}
+                  addTask={addTask}/>
+
+      <TaskList allTask={allTask}
+                setAllTask={setAllTask}/>
+                  
     </div>
   );
 }
